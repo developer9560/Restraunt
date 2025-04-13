@@ -20,22 +20,15 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./client/src"),
+      "@": path.resolve(import.meta.dirname, "client", "src"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
   },
-  root: "client",
+  root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: "../dist",
+    
+    outDir: path.resolve(import.meta.dirname, "dist"), // Changed to "dist" for Vercel compatibility
     emptyOutDir: true,
-  },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:5000",
-        changeOrigin: true,
-      },
-    },
   },
 });
